@@ -11,7 +11,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class MonitoringApp {
-    private static final String API_KEY = "29847f4048afad43231673dda2e8acb0"; // Replace with your actual API key
+    private static final String API_KEY = "29847f4048afad43231673dda2e8acb0"; 
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s";
 
     public JsonObject getWeatherData(String city) throws IOException {
@@ -19,30 +19,29 @@ public class MonitoringApp {
         try (CloseableHttpClient client = HttpClients.createDefault();
              CloseableHttpResponse response = client.execute(new HttpGet(url))) {
              
-            // Check for successful response
+            
             if (response.getStatusLine().getStatusCode() == 200) {
                 String json = EntityUtils.toString(response.getEntity());
                 return JsonParser.parseString(json).getAsJsonObject();
             } else {
                 System.out.println("Error: " + response.getStatusLine().getReasonPhrase());
-                return null; // Return null if the response is not successful
+                return null; 
             }
         }
     }
 
     public static void main(String[] args) {
         MonitoringApp app = new MonitoringApp();
-        String city = "pune"; // Change the city name as needed
-
+        String city = "pune"; 
         try {
-            // Fetch weather data for the specified city
+            
             JsonObject weatherData = app.getWeatherData(city);
             if (weatherData == null) {
                 System.out.println("No weather data available.");
                 return;
             }
 
-            // Extract and display weather data in a vertical format
+            
             JsonObject mainData = weatherData.getAsJsonObject("main");
             if (mainData == null) {
                 System.out.println("Main data not available.");
@@ -51,8 +50,8 @@ public class MonitoringApp {
 
             double tempKelvin = mainData.get("temp").getAsDouble();
             double feelsLikeKelvin = mainData.get("feels_like").getAsDouble();
-            double tempCelsius = tempKelvin - 273.15; // Convert to Celsius
-            double feelsLikeCelsius = feelsLikeKelvin - 273.15; // Convert to Celsius
+            double tempCelsius = tempKelvin - 273.15; 
+            double feelsLikeCelsius = feelsLikeKelvin - 273.15; 
 
             System.out.println("Weather data for " + city + ":");
             System.out.printf("Coordinates: %.4f, %.4f%n",
