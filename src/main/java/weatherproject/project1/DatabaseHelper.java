@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
 public class DatabaseHelper {
-    private static final String URL = "jdbc:mysql://localhost:3306/weather_db"; // Change as necessary
-    private static final String USER = "root"; // Change as necessary
-    private static final String PASSWORD = "password"; // Change as necessary
+    private static final String URL = "jdbc:mysql://localhost:3306/weather_db"; 
+    private static final String USER = "root"; 
+    private static final String PASSWORD = "password"; 
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
